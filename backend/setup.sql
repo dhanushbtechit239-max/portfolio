@@ -42,7 +42,7 @@ INSERT INTO projects (title, description, tags, emoji, gradient, github_url, liv
   'React,Node.js,MySQL,Express',
   '🗳️',
   'linear-gradient(135deg, #6c5ce7, #a29bfe)',
-  'https://github.com/dhanush',
+  'https://github.com/dhanushbtechit239-max',
   ''
 ),
 (
@@ -51,7 +51,7 @@ INSERT INTO projects (title, description, tags, emoji, gradient, github_url, liv
   'JavaScript,CSS3,REST API,Node.js',
   '🛒',
   'linear-gradient(135deg, #00cec9, #0984e3)',
-  'https://github.com/dhanush',
+  'https://github.com/dhanushbtechit239-max',
   ''
 ),
 (
@@ -60,7 +60,7 @@ INSERT INTO projects (title, description, tags, emoji, gradient, github_url, liv
   'Java,Servlets,MySQL,HTML',
   '📊',
   'linear-gradient(135deg, #fd79a8, #e84393)',
-  'https://github.com/dhanush',
+  'https://github.com/dhanushbtechit239-max',
   ''
 );
 

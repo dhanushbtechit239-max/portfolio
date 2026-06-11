@@ -437,7 +437,7 @@ const botKnowledge = {
   },
   contact: {
     keywords: ["contact", "email", "hire", "reach", "message", "phone", "social", "linkedin", "github", "connect", "call"],
-    response: "You can easily reach Dhanush via the Contact form at the bottom of this page, or connect with him on <a href='#' style='color:var(--accent);'>LinkedIn</a> and <a href='#' style='color:var(--accent);'>GitHub</a>. He's always open to discussing new opportunities or collaborations!",
+    response: "You can easily reach Dhanush via the Contact form at the bottom of this page, or connect with him on <a href='https://www.linkedin.com/in/dhanush-r-21345037a' style='color:var(--accent);'>LinkedIn</a> and <a href='https://github.com/dhanushbtechit239-maxs' style='color:var(--accent);'>GitHub</a>. He's always open to discussing new opportunities or collaborations!",
   },
   experience: {
     keywords: ["experience", "job", "background", "history", "role", "work experience", "career"],
