@@ -3,7 +3,7 @@
 // Connects to Express + MySQL backend at localhost:5000
 // ============================================================
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://portfolio-backend-lqrn.onrender.com/api";
 
 // ===== TOAST NOTIFICATION =====
 const toast = document.getElementById("toast");
