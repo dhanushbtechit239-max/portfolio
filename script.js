@@ -127,10 +127,16 @@ window.addEventListener("scroll", () => {
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 menuToggle.addEventListener("click", () => {
-  navLinks.classList.toggle("open");
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.classList.toggle("active");
+  document.body.style.overflow = isOpen ? "hidden" : "";
 });
 navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => navLinks.classList.remove("open"));
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.classList.remove("active");
+    document.body.style.overflow = "";
+  });
 });
 
 // ===== SCROLL PROGRESS =====
@@ -289,21 +295,22 @@ function renderProjects(projects) {
     const card = document.createElement("div");
     card.className = "project-card reveal";
     card.style.animationDelay = i * 0.1 + "s";
+
+    const imageSection = project.image_url
+      ? `<div class="project-image project-image-photo">
+           <img src="${project.image_url}" alt="${project.title}" loading="lazy" onerror="this.parentElement.className='project-image'; this.parentElement.innerHTML='${project.emoji || '🚀'}';">
+         </div>`
+      : `<div class="project-image" style="background:${project.gradient || "linear-gradient(135deg, #6c5ce7, #a29bfe)"};">
+           ${project.emoji || "🚀"}
+         </div>`;
+
     card.innerHTML = `
-      <div class="project-image" style="background:${
-        project.gradient || "linear-gradient(135deg, #6c5ce7, #a29bfe)"
-      };">
-        ${project.emoji || "🚀"}
-      </div>
+      ${imageSection}
       <div class="project-info">
         <h3>${project.title}</h3>
         <p>${project.description}</p>
         <div class="project-tags">${tagsHTML}</div>
-        ${
-          githubBtn || liveBtn
-            ? `<div class="project-actions">${githubBtn}${liveBtn}</div>`
-            : ""
-        }
+        ${githubBtn || liveBtn ? `<div class="project-actions">${githubBtn}${liveBtn}</div>` : ""}
       </div>`;
 
     projectsGrid.appendChild(card);
@@ -428,28 +435,32 @@ const botKnowledge = {
     response: "Hi there! 👋 I'm Dhanush's AI assistant. How can I help you explore his portfolio today?",
   },
   skills: {
-    keywords: ["skill", "technologies", "stack", "framework", "language", "tools", "know", "can do", "tech", "react", "java", "node", "html", "css"],
-    response: "Dhanush is highly skilled in modern web development! His core stack includes <strong>HTML5, CSS3, JavaScript (ES6+), React.js</strong>, and backend technologies like <strong>Node.js and Java</strong>. He also has a great eye for design and creating interactive UI/UX experiences.",
+    keywords: ["skill", "technologies", "stack", "framework", "language", "tools", "know", "can do", "tech", "python", "flask", "java", "node", "html", "css", "mongo", "javascript"],
+    response: "Dhanush is skilled in full stack web development! His core stack includes <strong>HTML5, CSS3, JavaScript, Python, Flask</strong> for backend, and <strong>MongoDB Atlas</strong> for databases. He also knows <strong>Java</strong> for object-oriented programming. He built real-world apps during his internship at Pristonix Technologies!",
   },
   projects: {
-    keywords: ["project", "work", "portfolio", "built", "created", "made", "developed", "app", "website", "system"],
-    response: "Dhanush has built some amazing projects! Some highlights include a comprehensive <strong>Voting System</strong>, a robust <strong>Admin Dashboard</strong>, and beautifully animated <strong>React websites</strong>. Check out the Projects section above for more details and live demos.",
+    keywords: ["project", "work", "portfolio", "built", "created", "made", "developed", "app", "website", "system", "lms", "learning"],
+    response: "Dhanush has built some great projects! His flagship project is a <strong>Learning Management System (LMS)</strong> built with Flask and MongoDB — featuring login systems, student dashboards and REST APIs. <a href='https://learning-management-system-pi-indol.vercel.app' style='color:var(--accent);' target='_blank'>🚀 View it live here!</a> Check the Projects section for more.",
   },
   contact: {
     keywords: ["contact", "email", "hire", "reach", "message", "phone", "social", "linkedin", "github", "connect", "call"],
-    response: "You can easily reach Dhanush via the Contact form at the bottom of this page, or connect with him on <a href='https://www.linkedin.com/in/dhanush-r-21345037a' style='color:var(--accent);'>LinkedIn</a> and <a href='https://github.com/dhanushbtechit239-maxs' style='color:var(--accent);'>GitHub</a>. He's always open to discussing new opportunities or collaborations!",
+    response: "You can reach Dhanush via the Contact form below, call <strong>+91 94452 16191</strong>, or connect on <a href='https://www.linkedin.com/in/dhanush-r-21345037a' style='color:var(--accent);' target='_blank'>LinkedIn</a> and <a href='https://github.com/dhanushbtechit239-max' style='color:var(--accent);' target='_blank'>GitHub</a>. He's always open to new opportunities!",
   },
   experience: {
-    keywords: ["experience", "job", "background", "history", "role", "work experience", "career"],
-    response: "Dhanush has solid experience building dynamic, responsive, and secure web applications. He has worked on complex systems like election analytics dashboards and full-stack solutions with robust databases. He is constantly learning and applying new technologies.",
+    keywords: ["experience", "job", "internship", "background", "history", "role", "work experience", "career", "pristonix"],
+    response: "Dhanush completed a <strong>Full Stack Developer Internship at Pristonix Technologies Pvt. Ltd.</strong> (June–July 2026) in Chennai, where he built web apps with Python, Flask and MongoDB, implemented user auth and REST APIs, and collaborated with a development team.",
   },
   education: {
-    keywords: ["education", "degree", "study", "college", "university", "school", "graduated", "student"],
-    response: "Dhanush has a strong educational background in Computer Science and Software Development, which forms the foundation of his technical expertise.",
+    keywords: ["education", "degree", "study", "college", "university", "school", "graduated", "student", "btech", "adhiparasakthi"],
+    response: "Dhanush is pursuing <strong>B.Tech Information Technology</strong> at <strong>Adhiparasakthi Engineering College</strong>, Chengalpattu, Tamil Nadu (August 2024 – May 2028). He has also completed 2 NPTEL certifications: <em>Introduction to Database Systems</em> and <em>Software Testing</em>.",
+  },
+  certificates: {
+    keywords: ["certificate", "certification", "course", "nptel", "achievement", "award", "training", "typewriting", "typing"],
+    response: "Dhanush has earned multiple certifications! <br>📜 <strong>Senior Grade Typewriting (English)</strong> (Aug 2024, 45 WPM, Distinction) <br>📜 <strong>Junior Grade Typewriting (English)</strong> (Feb 2024, 30 WPM, Distinction) <br>📜 <strong>Introduction to Database Systems (NPTEL)</strong> (Jan–Apr 2026, 56%) <br>📜 <strong>Software Testing (NPTEL)</strong> (Jul–Oct 2026, 61% - Elite).",
   },
   thanks: {
     keywords: ["thank", "thanks", "appreciate", "cool", "awesome", "nice", "great", "good", "ok", "okay"],
-    response: "You're very welcome! Let me know if you have any other questions.",
+    response: "You're very welcome! Let me know if you have any other questions. 😊",
   },
   default: {
     keywords: [],
@@ -557,13 +568,21 @@ const GEMINI_API_KEY = "AIzaSyDXbZb5j4PP6aRLNe-iMdmZXMlj7SPFoI8";
 async function fetchGeminiResponse(userMessage) {
   if (!GEMINI_API_KEY) return null;
 
-  const prompt = `You are the AI assistant on Dhanush's portfolio website.
+  const prompt = `You are the AI assistant on Dhanush R's portfolio website.
 Context about Dhanush:
-- Skills: HTML5, CSS3, JavaScript (ES6+), React.js, Node.js, Java.
-- Projects: Election Analytics Dashboard (React, Node, MySQL), E-Commerce Platform, Student Management System.
-- Experience: Building dynamic, responsive, secure web apps, full-stack solutions.
-- Education: Computer Science and Software Development (2021-2025).
-- Contact: dhanushbtechit239@gmail.com | Tamil Nadu, India | +91 94452 16191
+- Full Name: Dhanush R
+- Role: B.Tech IT Student & Full Stack Developer
+- Location: Chengalpattu, Tamil Nadu, India
+- Contact: dhanushbtechit239@gmail.com | +91 94452 16191
+- Skills: HTML5, CSS3, JavaScript, Python, Flask, MongoDB Atlas, Java.
+- Internship: Full Stack Developer Intern at Pristonix Technologies Pvt. Ltd., Chennai (June–July 2026). Built web apps with Python/Flask/MongoDB, implemented REST APIs and user authentication.
+- Projects: Learning Management System (LMS) — Flask + MongoDB, with login system, student dashboard, REST APIs. Live: learning-management-system-pi-indol.vercel.app
+- Education: B.Tech Information Technology at Adhiparasakthi Engineering College, Chengalpattu (August 2024 – May 2028)
+- Certifications: NPTEL - Introduction to Database Systems (Jan–Apr 2026, 56%), NPTEL - Software Testing (Jul–Oct 2026, 61% - Elite), Senior Grade Typewriting English (Aug 2024, 45 WPM, Distinction), Junior Grade Typewriting English (Feb 2024, 30 WPM, Distinction)
+- LinkedIn: https://www.linkedin.com/in/dhanush-r-21345037a
+- GitHub: https://github.com/dhanushbtechit239-max
+- Hobbies: Chess, Cricket
+- Languages: Tamil (fluent), English (basic)
 
 The user says: "${userMessage}"
 Respond concisely, politely, and professionally as the assistant. Keep it under 3 sentences. If asked something outside this context, politely say you don't know but they can contact Dhanush directly.`;

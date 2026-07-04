@@ -1,1 +1,15 @@
 node_modules/
+
+# Environment variables (NEVER commit these)
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
