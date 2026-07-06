@@ -42,6 +42,7 @@ async function run() {
         gradient   VARCHAR(255)  DEFAULT 'linear-gradient(135deg, #6c5ce7, #a29bfe)',
         github_url VARCHAR(500)  DEFAULT '',
         live_url   VARCHAR(500)  DEFAULT '',
+        image_url  VARCHAR(500)  DEFAULT '',
         created_at TIMESTAMP     DEFAULT CURRENT_TIMESTAMP
       )
     `);
@@ -53,6 +54,7 @@ async function run() {
       ["gradient",   "VARCHAR(255)  DEFAULT 'linear-gradient(135deg, #6c5ce7, #a29bfe)' AFTER emoji"],
       ["github_url", "VARCHAR(500)  DEFAULT '' AFTER gradient"],
       ["live_url",   "VARCHAR(500)  DEFAULT '' AFTER github_url"],
+      ["image_url",  "VARCHAR(500)  DEFAULT '' AFTER live_url"],
     ];
 
     for (const [col, def] of columnsToAdd) {
@@ -82,36 +84,59 @@ async function run() {
 
     if (parseInt(count) === 0) {
       await conn.query(`
-        INSERT INTO projects (title, description, tags, emoji, gradient, github_url, live_url) VALUES
+        INSERT INTO projects (title, description, tags, emoji, gradient, github_url, live_url, image_url) VALUES
         (
-          'Election Analytics Dashboard',
-          'A full-featured election management system with real-time vote tracking, OTP authentication, and live result analytics. Built with a secure backend and intuitive admin panel.',
-          'React,Node.js,MySQL,Express',
-          '🗳️',
-          'linear-gradient(135deg, #6c5ce7, #a29bfe)',
-          'https://github.com/dhanushbtechit239-max',
-          ''
-        ),
-        (
-          'E-Commerce Platform',
-          'Modern shopping experience with cart management, payment integration, product filtering, and a full admin panel for inventory management.',
-          'JavaScript,CSS3,REST API,Node.js',
+          'E-Commerce Website',
+          'Modern e-commerce platform featuring product listings, search filters, and an interactive shopping cart system.',
+          'JavaScript,CSS3,HTML5,Node.js',
           '🛒',
           'linear-gradient(135deg, #00cec9, #0984e3)',
-          'https://github.com/dhanushbtechit239-max',
-          ''
+          'https://github.com/dhanushbtechit239-max/E-commerce-website',
+          '',
+          'assets/projects/ecommerce.png'
         ),
         (
-          'Student Management System',
-          'Attendance tracking, grade management, and comprehensive student analytics dashboard. Features role-based access for admins and faculty.',
-          'Java,Servlets,MySQL,HTML',
-          '📊',
-          'linear-gradient(135deg, #fd79a8, #e84393)',
-          'https://github.com/dhanushbtechit239-max',
-          ''
+          'Portfolio Website',
+          'My personal developer portfolio website highlighting my projects, skills, education, and experience. Features live backend statistics, an interactive AI chatbot, and a contact form.',
+          'JavaScript,CSS3,HTML5,Express,MySQL',
+          '✨',
+          'linear-gradient(135deg, #a29bfe, #6c5ce7)',
+          'https://github.com/dhanushbtechit239-max/portfolio',
+          '',
+          'assets/projects/portfolio.png'
+        ),
+        (
+          'Learning Management System',
+          'A python-based web application built during my internship at Pristonix Technologies, facilitating student learning paths, dashboards, and role-based permissions.',
+          'Python,Flask,MongoDB,HTML5',
+          '📚',
+          'linear-gradient(135deg, #ff7675, #d63031)',
+          'https://github.com/dhanushbtechit239-max/learning-management-system',
+          '',
+          'assets/projects/lms.png'
+        ),
+        (
+          'Task Management System',
+          'An intuitive task organization application to plan, prioritize, and monitor daily tasks.',
+          'JavaScript,HTML5,CSS3',
+          '📋',
+          'linear-gradient(135deg, #55efc4, #00b894)',
+          'https://github.com/dhanushbtechit239-max/task-management',
+          '',
+          'assets/projects/taskmanager.png'
+        ),
+        (
+          'Blog Platform',
+          'A functional blogging web platform allowing users to create posts, categorize topics, and leave comments.',
+          'JavaScript,Node.js,Express,MongoDB',
+          '✍️',
+          'linear-gradient(135deg, #ffeaa7, #fdcb6e)',
+          'https://github.com/dhanushbtechit239-max/blog-plotform',
+          '',
+          'assets/projects/blog.png'
         )
       `);
-      console.log("🌱 Seeded 3 projects");
+      console.log("🌱 Seeded 5 projects");
     } else {
       console.log(`ℹ️  Projects table already has ${count} row(s), skipping seed`);
     }

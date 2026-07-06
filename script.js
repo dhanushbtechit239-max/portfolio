@@ -3,7 +3,69 @@
 // Connects to Express + MySQL backend at localhost:5000
 // ============================================================
 
-const API_BASE = "https://portfolio-backend-lqrn.onrender.com/api";
+// Smart API Base selection: uses local backend if running locally, production otherwise.
+const API_BASE = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:")
+  ? "http://localhost:5000/api"
+  : "https://portfolio-backend-lqrn.onrender.com/api";
+
+// Static backup projects to show if the backend is down
+const DEFAULT_PROJECTS = [
+  {
+    id: 1,
+    title: "E-Commerce Website",
+    description: "Modern e-commerce platform featuring product listings, search filters, and an interactive shopping cart system.",
+    tags: "JavaScript,CSS3,HTML5,Node.js",
+    emoji: "🛒",
+    gradient: "linear-gradient(135deg, #00cec9, #0984e3)",
+    github_url: "https://github.com/dhanushbtechit239-max/E-commerce-website",
+    live_url: "",
+    image_url: "assets/projects/ecommerce.png"
+  },
+  {
+    id: 2,
+    title: "Portfolio Website",
+    description: "My personal developer portfolio website highlighting my projects, skills, education, and experience. Features live backend statistics, an interactive AI chatbot, and a contact form.",
+    tags: "JavaScript,CSS3,HTML5,Express,MySQL",
+    emoji: "✨",
+    gradient: "linear-gradient(135deg, #a29bfe, #6c5ce7)",
+    github_url: "https://github.com/dhanushbtechit239-max/portfolio",
+    live_url: "",
+    image_url: "assets/projects/portfolio.png"
+  },
+  {
+    id: 3,
+    title: "Learning Management System",
+    description: "A python-based web application built during my internship at Pristonix Technologies, facilitating student learning paths, dashboards, and role-based permissions.",
+    tags: "Python,Flask,MongoDB,HTML5",
+    emoji: "📚",
+    gradient: "linear-gradient(135deg, #ff7675, #d63031)",
+    github_url: "https://github.com/dhanushbtechit239-max/learning-management-system",
+    live_url: "",
+    image_url: "assets/projects/lms.png"
+  },
+  {
+    id: 4,
+    title: "Task Management System",
+    description: "An intuitive task organization application to plan, prioritize, and monitor daily tasks.",
+    tags: "JavaScript,HTML5,CSS3",
+    emoji: "📋",
+    gradient: "linear-gradient(135deg, #55efc4, #00b894)",
+    github_url: "https://github.com/dhanushbtechit239-max/task-management",
+    live_url: "",
+    image_url: "assets/projects/taskmanager.png"
+  },
+  {
+    id: 5,
+    title: "Blog Platform",
+    description: "A functional blogging web platform allowing users to create posts, categorize topics, and leave comments.",
+    tags: "JavaScript,Node.js,Express,MongoDB",
+    emoji: "✍️",
+    gradient: "linear-gradient(135deg, #ffeaa7, #fdcb6e)",
+    github_url: "https://github.com/dhanushbtechit239-max/blog-plotform",
+    live_url: "",
+    image_url: "assets/projects/blog.png"
+  }
+];
 
 // ===== TOAST NOTIFICATION =====
 const toast = document.getElementById("toast");
@@ -335,14 +397,15 @@ async function loadProjects() {
     const res = await fetch(`${API_BASE}/projects`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    if (data.success) {
+    if (data.success && data.data && data.data.length > 0) {
       renderProjects(data.data);
     } else {
-      showProjectsError();
+      console.warn("⚠️ Empty or invalid project list, loading fallback projects.");
+      renderProjects(DEFAULT_PROJECTS);
     }
   } catch (err) {
-    console.warn("⚠️ Could not load projects from API:", err.message);
-    showProjectsError();
+    console.warn("⚠️ Could not load projects from API, falling back to static projects:", err.message);
+    renderProjects(DEFAULT_PROJECTS);
   }
 }
 
