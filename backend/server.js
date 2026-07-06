@@ -53,8 +53,12 @@ app.use("/api/projects", projectRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/stats", statsRoutes);
 
-// Serve static files from the frontend directory
-app.use(express.static(path.join(__dirname, "../frontend")));
+// Serve static files from the root directory securely (only specific frontend assets)
+app.use("/assets", express.static(path.join(__dirname, "../assets")));
+app.get("/style.css", (req, res) => res.sendFile(path.join(__dirname, "../style.css")));
+app.get("/script.js", (req, res) => res.sendFile(path.join(__dirname, "../script.js")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
+app.get("/index.html", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 // ── 404 Handler ──────────────────────────────────────────────────────────────
 app.use((req, res) => {
