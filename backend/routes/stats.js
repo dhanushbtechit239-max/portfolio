@@ -17,23 +17,23 @@ router.get("/", async (req, res) => {
     res.json({
       success: true,
       data: {
-        projects: projectCount.count,
-        messages: contactCount.count,
-        // Static values — update these as your career grows
-        yearsExperience: 3,
-        happyClients: 10,
+        projects: projectCount.count || 5,
+        messages: contactCount.count || 0,
+        // Static values matching Dhanush's actual accomplishments
+        yearsExperience: 1, // 1 Internship at Pristonix Technologies
+        happyClients: 2,    // 2 NPTEL Certifications
       },
     });
   } catch (err) {
-    console.error("GET /api/stats error:", err);
-    // Graceful fallback
+    console.error("GET /api/stats error:", err.message);
+    // Graceful fallback when database is offline
     res.json({
       success: true,
       data: {
-        projects: 15,
+        projects: 5,
         messages: 0,
-        yearsExperience: 3,
-        happyClients: 10,
+        yearsExperience: 1, // 1 Internship
+        happyClients: 2,    // 2 NPTEL Certifications
       },
     });
   }
