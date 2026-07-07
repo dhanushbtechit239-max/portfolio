@@ -29,7 +29,7 @@ const DEFAULT_PROJECTS = [
     emoji: "✨",
     gradient: "linear-gradient(135deg, #a29bfe, #6c5ce7)",
     github_url: "https://github.com/dhanushbtechit239-max/portfolio",
-    live_url: "",
+    live_url: "https://dhanushbtechit239-max.github.io/portfolio/",
     image_url: "assets/projects/portfolio.png"
   },
   {
@@ -40,7 +40,7 @@ const DEFAULT_PROJECTS = [
     emoji: "📚",
     gradient: "linear-gradient(135deg, #ff7675, #d63031)",
     github_url: "https://github.com/dhanushbtechit239-max/learning-management-system",
-    live_url: "",
+    live_url: "https://learning-management-system-pi-indol.vercel.app",
     image_url: "assets/projects/lms.png"
   },
   {

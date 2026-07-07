@@ -507,29 +507,9 @@ section {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1fr;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: center;
-}
-
-.about-image-wrapper {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  aspect-ratio: 4/5;
-  background: var(--gradient-1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 8rem;
-}
-
-.about-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .about-content .section-desc {
@@ -561,7 +541,7 @@ section {
 /* ===== SKILLS ===== */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   max-width: 1200px;
   margin: 0 auto;
@@ -1519,6 +1499,10 @@ section {
   }
 
   .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills-grid {
     grid-template-columns: 1fr;
   }
 

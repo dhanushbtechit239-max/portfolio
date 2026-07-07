@@ -54,7 +54,7 @@ INSERT INTO projects (title, description, tags, emoji, gradient, github_url, liv
   '✨',
   'linear-gradient(135deg, #a29bfe, #6c5ce7)',
   'https://github.com/dhanushbtechit239-max/portfolio',
-  '',
+  'https://dhanushbtechit239-max.github.io/portfolio/',
   'assets/projects/portfolio.png'
 ),
 (
@@ -64,7 +64,7 @@ INSERT INTO projects (title, description, tags, emoji, gradient, github_url, liv
   '📚',
   'linear-gradient(135deg, #ff7675, #d63031)',
   'https://github.com/dhanushbtechit239-max/learning-management-system',
-  '',
+  'https://learning-management-system-pi-indol.vercel.app',
   'assets/projects/lms.png'
 ),
 (

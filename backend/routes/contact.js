@@ -62,9 +62,11 @@ router.post("/", async (req, res) => {
 
   // Send email alert to Dhanush regardless of database success
   if (transporter) {
-    const mailOptions = {
+    // 1. Notification to Dhanush
+    const adminMailOptions = {
       from: `"Portfolio Contact Form" <${emailUser}>`,
-      to: "dhanushbtechit239@gmail.com",
+      to: emailUser, // Sends to your email (the configured sender)
+      replyTo: email, // Click reply to reply directly to the visitor
       subject: `📬 Portfolio Contact: ${subject || "No Subject"}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #fafafa; color: #333333;">
@@ -85,9 +87,39 @@ router.post("/", async (req, res) => {
       `,
     };
 
-    // Send mail asynchronously so client doesn't wait
-    transporter.sendMail(mailOptions).catch((mailErr) => {
-      console.error("❌ Email notification failed to send:", mailErr.message);
+    // 2. Confirmation to the Visitor
+    const visitorMailOptions = {
+      from: `"Dhanush R" <${emailUser}>`,
+      to: email, // Sends to the visitor's entered email
+      subject: `Received: ${subject || "Thank you for reaching out!"}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #fafafa; color: #333333;">
+          <h2 style="color: #6c5ce7; border-bottom: 2px solid #6c5ce7; padding-bottom: 10px; margin-top: 0;">Message Received!</h2>
+          <p>Hi <strong>${name}</strong>,</p>
+          <p>Thank you for reaching out and visiting my website! I have received your message and will get back to you as soon as possible.</p>
+          <p>Here is a summary of the details you sent:</p>
+          <div style="margin-top: 20px; padding: 15px; background-color: #ffffff; border-left: 4px solid #6c5ce7; border-radius: 4px; font-style: italic; white-space: pre-line;">
+            <strong>Subject:</strong> ${subject || "N/A"}
+            <strong>Message:</strong>
+            ${message}
+          </div>
+          <br>
+          <p>Best regards,</p>
+          <p><strong>Dhanush R</strong></p>
+          <p style="margin-top: 30px; font-size: 0.8rem; color: #888888; text-align: center; border-top: 1px solid #e0e0e0; padding-top: 15px; margin-bottom: 0;">
+            This is an automated confirmation of receipt.
+          </p>
+        </div>
+      `,
+    };
+
+    // Send both mails asynchronously
+    transporter.sendMail(adminMailOptions).catch((mailErr) => {
+      console.error("❌ Admin notification email failed to send:", mailErr.message);
+    });
+
+    transporter.sendMail(visitorMailOptions).catch((mailErr) => {
+      console.error("❌ Visitor confirmation email failed to send:", mailErr.message);
     });
   }
 
